@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
             
             UsersTableSeeder::class,
             AdministratorsTableSeeder::class,
-            EngineersTableSeeder::class,
+            // EngineersTableSeeder::class,
 
             // PartnersTableSeeder::class,
             // PartnerUsersTableSeeder::class,
