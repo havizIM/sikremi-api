@@ -72,33 +72,10 @@ class AuthController extends Controller
 
                     } else {
 
-                        try {
-                            $log = new Log;
-                            $log->user_id = $user->id;
-                            $log->description = 'Login System';
-                            $log->reference_id = $user->id;
-                            $log->url = '#/setting';
-                            $log->save();
-                        } catch (\Exception $e) {
-                            return response()->json([
-                                'status' => false,
-                                'message' => 'Failed add log',
-                                'error' => $e->getMessage()
-                            ], 500);
-                        }
-
-                        if($user->roles === 'ADMINISTRATOR') {
-                            $session = User::with(['administrator'])->findOrFail($user->id);
-                        } elseif($user->roles === 'ENGINEER'){
-                            $session = $user->with(['engineer'])->findOrFail($user->id);
-                        } else {
-                            $session = $user->with(['partner_user.partner'])->findOrFail($user->id);
-                        }
-
                         return response()->json([
                             'status' => true,
                             'message' => 'Success Login',
-                            'data' => $session,
+                            'data' => $user,
                             'token' => $token
                         ], 200);
 
